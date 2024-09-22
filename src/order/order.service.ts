@@ -18,7 +18,7 @@ import { User } from 'src/user/Entity/user.entity';
 @Injectable()
 export class OrderService {
   constructor(
-    @Inject('EMAIL_SERVICE') private client: ClientProxy,
+    //@Inject('EMAIL_SERVICE') private client: ClientProxy,
     @InjectDataSource() private dataSource: DataSource
     //@InjectRepository(Order) private dataSource: DataSource
     //private productService: ProductService,
@@ -74,10 +74,10 @@ export class OrderService {
 
       // Commit the transaction if everything went well
       await queryRunner.commitTransaction();
-      this.client.emit('order_confirmation', {
+      /* this.client.emit('order_confirmation', {
         email: order.user.email, // Make sure 'order.user' exists
         order: order,
-      });
+      }); */
       return order;
     } catch (error) {
       // Rollback the transaction in case of error

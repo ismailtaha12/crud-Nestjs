@@ -16,7 +16,7 @@ export class Order {
   @Column()
   quantity: number;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column()
   totalPrice: number;
 
   @Column({ default: 'pending' }) // pending, paid, shipped, delivered
