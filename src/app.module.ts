@@ -13,29 +13,41 @@ import { OrderModule } from './order/order.module';
 import { Order } from './order/entities/order.entity';
 import { PaymentModule } from './payment/payment.module';
 import { Payment } from './payment/entities/payment.entity';
+import { RabbitMQModule } from './rabbit-mq/rabbit-mq.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // Makes the config available globally
     }),
-    userModule,
-    AuthModule,
-
     ConfigModule.forRoot({ cache: true, isGlobal: true, load: [config] }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'Ismail121',
-      database: 'crudtest',
+      type: 'postgres',
+      host: 'localhost', // or your PostgreSQL host
+      port: 5433, // Default PostgreSQL port
+      username: 'postgres', // e.g., 'postgres'
+      password: 'root',
+      database: 'postgres',
       entities: [User, RefreshToken, Product, Order, Payment],
-      synchronize: true,
+      synchronize: true, // Only in development
     }),
+    //TypeOrmModule.forRoot({
+    // type: 'mysql',
+    // host: 'localhost',
+    // port: 3306,
+    // username: 'root',
+    //  password: 'ismail1',
+    // database: 'new_schema',
+    //  entities: [User, RefreshToken, Product, Order, Payment],
+    //  synchronize: true,
+    // }),
+
+    userModule,
+    AuthModule,
     ProductModule,
     OrderModule,
     PaymentModule,
+    RabbitMQModule,
   ],
 })
 export class AppModule {} //implements NestModule {

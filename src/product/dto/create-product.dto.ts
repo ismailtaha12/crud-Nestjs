@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import { IsString, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
 
 export class CreateProductDto {
@@ -6,10 +5,13 @@ export class CreateProductDto {
   @IsNotEmpty()
   name: string;
 
-  @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
   @IsNumber()
   @IsPositive()
   price: number;
+
+  /* @IsNumber()
+  @IsPositive()
+  testprice; */
 
   @IsString()
   description: string;
